@@ -32,6 +32,9 @@ class Commande
     #[ORM\Column]
     private ?int $etat = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commande')]
+    private ?Utilisateur $utilisateur = null;
+
     public function __construct()
     {
         $this->details = new ArrayCollection();
@@ -104,6 +107,18 @@ class Commande
     public function setEtat(int $etat): static
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): static
+    {
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
