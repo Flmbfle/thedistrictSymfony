@@ -1,0 +1,144 @@
+.beige {
+    color:#DDD0C8;
+}
+.bg-beige {
+    background-color:#DDD0C8;
+}
+.border-beige
+.gris {
+    color: #323232;
+}
+.bg-gris {
+    background-color: #323232;
+}
+.bg-fondu {
+    background: rgb(50,50,50);
+    background: linear-gradient(90deg, rgba(50,50,50,1) 0%, rgba(115,110,107,1) 20%, rgba(143,136,132,1) 30%, rgba(163,154,149,1) 40%, rgba(155,148,142,1) 70%, rgba(120,115,111,1) 80%, rgba(50,50,50,1) 100%);
+}
+p {
+    font-size: large;
+}
+
+video {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	min-width: 100%;
+	min-height: 100%;
+	width: 100%;
+	z-index: 0;
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.video-container {
+    position: relative;
+    height: 50vh;
+    overflow: hidden;
+}
+
+.parallax {
+    background-image: url("/assets/img/parallax/categories.png");
+
+    min-height: 40vh; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    background-color: #FEF4E8;
+}
+.parallax2 {
+    background-image: url("/assets/img/parallax/plats.png");
+
+    min-height: 40vh; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    background-color: #FEF4E8;
+}
+
+.card {
+    transition: transform .2s;
+}
+.card:hover  {
+    -ms-transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+}
+
+footer a:hover {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform:scale(1.2);
+}
+
+.fleche {
+    width: 180px;
+}
+  
+  /* Classe pour positionner le bouton "Commander" et le prix en bas à droite */
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+.scrollable-text {
+    max-height: 100px; /* Hauteur maximale souhaitée */
+    overflow-y: auto; /* Ajoutez une barre de défilement verticale en cas de dépassement du contenu */
+}
+
+.image-container{
+    position: relative;
+    height: 50vh;
+    overflow: hidden;
+}
+
+.image-container img {
+
+	min-height: 100%;
+	width: 100%;
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 28%;
+    left: 0; /* Alignez la légende à gauche du conteneur */
+    right: 0; /* Alignez la légende à droite du conteneur */
+    padding: 50px; /* Ajoutez un peu d'espacement autour de la légende */
+    color: white; /* Couleur du texte */
+}
+
+@media (max-width: 768px) {@media (max-width: 768px) {
+    .card {
+        width: 100%;
+        height: auto;
+    }
+    .card-custom{
+        max-height: max-content;
+        display: flex;
+      }
+    .card-img {
+        height: auto;
+        width: auto;
+    }
+  }
+}
+
+.btn-form {
+    background-color: #DDD0C8;
+    transition: transform 0.4s;
+    border-color: #323232;
+    border-width: 2px ;
+    margin: 5px;
+}
+.btn-form:hover {
+    -ms-transform: scale(1.15); /* IE 9 */
+    -webkit-transform: scale(1.15); /* Safari 3-8 */
+    transform: scale(1.15);
+    border-color: #323232;
+}
