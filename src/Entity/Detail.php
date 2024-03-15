@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Commande;
 use App\Repository\DetailRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,14 +15,15 @@ class Detail
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $quantite = null;
+    private ?int $Quantite = null;
+
+    #[ORM\ManyToOne(inversedBy: 'detail')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Commande $commande = null;
 
     #[ORM\ManyToOne(inversedBy: 'details')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?plat $plat = null;
-
-    #[ORM\ManyToOne(inversedBy: 'details')]
-    private ?commande $commande = null;
+    private ?Plat $plat = null;
 
     public function getId(): ?int
     {
@@ -30,36 +32,36 @@ class Detail
 
     public function getQuantite(): ?int
     {
-        return $this->quantite;
+        return $this->Quantite;
     }
 
-    public function setQuantite(int $quantite): static
+    public function setQuantite(int $Quantite): static
     {
-        $this->quantite = $quantite;
+        $this->Quantite = $Quantite;
 
         return $this;
     }
 
-    public function getPlat(): ?plat
-    {
-        return $this->plat;
-    }
-
-    public function setPlat(?plat $plat): static
-    {
-        $this->plat = $plat;
-
-        return $this;
-    }
-
-    public function getCommande(): ?commande
+    public function getCommande(): ?Commande
     {
         return $this->commande;
     }
 
-    public function setCommande(?commande $commande): static
+    public function setCommande(?Commande $commande): static
     {
         $this->commande = $commande;
+
+        return $this;
+    }
+
+    public function getPlat(): ?Plat
+    {
+        return $this->plat;
+    }
+
+    public function setPlat(?Plat $plat): static
+    {
+        $this->plat = $plat;
 
         return $this;
     }

@@ -12,11 +12,9 @@
         <meta name="Geography" content="80000, Amiens, France">
         {% block stylesheets %}
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-            <link rel="stylesheet" href="/css/style.css">
+            <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         {% endblock %}
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
     </head>
 
     <body class="bg-gris">
@@ -26,8 +24,8 @@
                 <!--Nav-->
                 <nav class="navbar navbar-expand-lg rounded-4 border shadow my-3 beige">
                   <div class="container-fluid">
-                    <a class="navbar-brand" href="index.html">
-                      <img src="../assets/img/the_district_brand/logo_transparent.png" alt="Logo" width="75" height="75" class="d-inline-block align-text-center">
+                    <a class="navbar-brand" href="{{ path('app_accueil') }}">
+                      <img src="{{ asset('assets/img/the_district_brand/logo_transparent.png')}}" alt="Logo" width="75" height="75" class="d-inline-block align-text-center">
                     </a>
                     <button class="navbar-toggler bg-beige border" type="button" data-bs-toggle="collapse" data-bs-target="#headerNav" aria-controls="headerNav" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
@@ -68,9 +66,7 @@
                     </div>
                 </nav>
             </header>
-            {% block body %}
-
-            {% endblock %}
+            {% block body %}{% endblock %}
             <!--Footer-->
             <footer class="d-none d-md-block text-center my-3 col-12">
                 <div class="rounded-4 col-md-10 col-lg-8 col-xl-6 mx-auto border">
@@ -93,8 +89,8 @@
                     </svg>
                     </a>
                     <!-- The District -->
-                    <a class="navbar-brand nav-item m-5" href="index.php">
-                    <img src="{{ path('app_accueil') }}" alt="Logo" width="100" height="100" class="d-inline-block align-text-center">
+                    <a class="navbar-brand nav-item m-5" href="{{ path('app_accueil') }}">
+                    <img src="{{ asset('assets/img/the_district_brand/logo_transparent.png')}}" alt="Logo" width="100" height="100" class="d-inline-block align-text-center">
                     </a>
                     <!-- Instagram -->
                     <a class="btn text-white btn-floating m-1" style="background-color: #ac2bac" href="#!" role="button">
@@ -123,5 +119,6 @@
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
         </script>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>
