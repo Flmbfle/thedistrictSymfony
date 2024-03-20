@@ -24,8 +24,8 @@ class AccueilController extends AbstractController
 
     public function index(): Response
     {
-        $categorie = $this -> categorieRepository -> findBy ( ['active' => 1], null );
-        $plat = $this -> platRepository -> findBy ( ['active'=> 1], null, 3);
+        $categorie = $this -> categorieRepository -> findBy ( ['active' => 1], null , 6);
+        $plat = $this -> platRepository -> findBy ( ['active'=> 1], /*['quantité' => 'ASC']*/ null, 3);
 
         return $this->render('accueil/index.html.twig', 
         
