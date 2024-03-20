@@ -35,7 +35,7 @@
                     <div class="card shadow m-5 fs-4 rounded-5 col-7 col-md-9 col-xl-7 text-center  bg-beige">
                         <img src="{{ asset('/assets/img/categorie/' ~ categorie . image )}}" class="card-img-top img-fluid rounded-top-5" alt="{{ categorie . libelle }}">
                         <div class="card-body">
-                            <a href="{{ categorie . id }}" class="btn card-title fs-5 p-0"><h3 class="m-0">{{ categorie . libelle }}</h3></a>
+                            <a href="{{ path('app_platscat', {'categorie_id': categorie.id}) }}" class="btn card-title fs-5 p-0"><h3 class="m-0">{{ categorie . libelle }}</h3></a>
                         </div>
                     </div>
                 </div>

@@ -40,30 +40,50 @@ class CatalogueController extends AbstractController
     }
 
     #[Route('/plats', name: 'app_plats')]
-    public function affichage_plat(): Response
+    public function ViewPlats(): Response
     {
+        $categories=$this->categorieRepository->findAll();
+        $plats=$this->platRepository->findAll();
 
-        return $this->render('catalogue/plats.html.twig', [
-            'controller_name' => 'CatalogueController',
-        ]);
-    }
-    #[Route('/plats/{categorie_id}', name: 'app_platsByCat')]
-    public function affichage_platByCat(): Response
-    {
+        return $this->render('plats/index.html.twig', 
         
-        return $this->render('catalogue/plats/{categorie_id}.html.twig', [
-            'controller_name' => 'CatalogueController',
+            [
+                'controller_name' => 'PlatsController',
+
+                'categorie'=> $categories,
+
+                'plat'=> $plats
+            ]
+        );
+    }
+
+    #[Route('/plats/{categorie_id}', name: 'app_platscat')]
+    public function viewPlatCat($categorie_id): Response
+    {
+        // Ici, vous pouvez ajouter votre logique pour récupérer les détails de la catégorie avec l'ID $categorie_id
+
+        // Par exemple, vous pouvez utiliser $categorie_id pour rechercher les plats de cette catégorie dans la base de données
+        
+        return $this->render('catalogue/platscat/' . $categorie_id . '.html.twig', [
+            'categorie_id' => $categorie_id,
         ]);
     }
 
     #[Route('/categories', name: 'app_categories')]
-    public function affichage_categorie(): Response
+    public function ViewCategorie(): Response
     {
+        $categorie = $this -> categorieRepository -> findAll ();
         
-        return $this->render('catalogue/categories.html.twig', [
-            'controller_name' => 'CatalogueController',
-        ]);
-    }
+        // Regarde pagination pour les autres pages du caroussel
 
+        return $this->render('categorie/index.html.twig', 
+        
+            [
+                'controller_name' => 'CategorieController',
+
+                'categorie'=> $categorie,
+            ]
+        );
+    }
 
 }

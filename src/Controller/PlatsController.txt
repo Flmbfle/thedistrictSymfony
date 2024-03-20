@@ -22,7 +22,7 @@ class PlatsController extends AbstractController
 
     #[Route('/plats', name: 'app_plats')]
 
-    public function index(): Response
+    public function ViewPlats(): Response
     {
         $categories=$this->categorieRepository->findAll();
         $plats=$this->platRepository->findAll();
