@@ -21,7 +21,7 @@ class CatalogueController extends AbstractController
         $this->platRepository = $platRepository;
     }
 
-    #[Route('/', name: 'app_catalogue')]
+    #[Route("/", name: "app_catalogue")]
 
     public function index(): Response
     {
@@ -40,7 +40,7 @@ class CatalogueController extends AbstractController
         );
     }
 
-    #[Route('/plats', name: 'app_plats')]
+    #[Route("/plats", name: "app_plats")]
     public function ViewPlats(): Response
     {
         $categories=$this->categorieRepository->findAll();
@@ -58,7 +58,7 @@ class CatalogueController extends AbstractController
         );
     }
 
-    #[Route('/categories', name: 'app_categories')]
+    #[Route("/categories", name: "app_categories")]
     public function ViewCategorie(): Response
     {
         $categorie = $this -> categorieRepository -> findAll ();
@@ -75,7 +75,7 @@ class CatalogueController extends AbstractController
         );
     }
 
-    #[Route('/plats/{categorie_id}', name: 'app_platscat')]
+    #[Route("/plats/{categorie_id}", name: "app_platscat")]
     public function viewPlatCat($categorie_id): Response
     {
         // Récupérer les détails de la catégorie avec l'ID $categorie_id
