@@ -27,7 +27,7 @@ class CatalogueController extends AbstractController
     {
         $categorie = $this -> categorieRepository -> findBy ( ['active' => 1], null , 6);
         $plat = $this -> platRepository -> findBy ( ['active'=> 1], /*['quantité' => 'ASC']*/ null, 3);
-
+        
         return $this->render('catalogue/index.html.twig', 
         
             [
@@ -35,11 +35,13 @@ class CatalogueController extends AbstractController
 
                 'categorie'=> $categorie,
 
-                'plat'=> $plat
+                'plat'=> $plat,
             ]
+            
         );
     }
 
+    
     #[Route("/plats", name: "app_plats")]
     public function ViewPlats(): Response
     {

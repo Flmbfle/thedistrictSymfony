@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
 class Plat
 {
@@ -25,8 +26,11 @@ class Plat
     #[ORM\Column(length: 50)]
     private ?string $image = null;
 
-    #[ORM\ManyToOne(inversedBy: 'plats')]
-    #[ORM\JoinColumn(nullable: false)]
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="plats")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'plat')]
     private ?categorie $categorie = null;
 
     #[ORM\OneToMany(targetEntity: Detail::class, mappedBy: 'plat')]
@@ -101,7 +105,7 @@ class Plat
         return $this->categorie;
     }
 
-    public function setCategorie(?categorie $categorie): static
+    public function setCategorie(?categorie $categorie): self
     {
         $this->categorie = $categorie;
 

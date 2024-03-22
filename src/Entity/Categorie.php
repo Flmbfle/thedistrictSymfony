@@ -22,7 +22,8 @@ class Categorie
     private ?string $image = null;
 
 
-    #[ORM\OneToMany(targetEntity: Plat::class, mappedBy: 'categorie')]
+    
+    #[ORM\OneToMany(targetEntity: Plat::class, mappedBy: "categorie")]
     private Collection $plats;
 
     #[ORM\Column]
