@@ -150,6 +150,17 @@ class AppFixtures extends Fixture
         $manager -> persist( $utilisateur2 );
         $manager -> flush ();
 
+        $utilisateur3 = new Utilisateur();
+        $utilisateur3 -> setEmail("erwabtot@gmail.com");
+        $utilisateur3 -> setRoles(["ROLE_SUPER_ADMNIN"]);
+        $utilisateur3 -> setPassword("");
+        $utilisateur3 -> setNom("Totet");
+        $utilisateur3 -> setPrenom("Erwan");
+        $utilisateur3 -> setTelephone("0635194831");
+        $utilisateur3 -> setAdresse("3 Bis rue de Nesle appt 1");
+        $utilisateur3 -> setCp("80190");
+        $utilisateur3 -> setVille("Mesnil-Saint-Nicaise");
+
         
     # ================================================================================ #
      #                                    COMMANDE                                    #
