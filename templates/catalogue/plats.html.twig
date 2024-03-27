@@ -16,12 +16,12 @@
                         </div>
                         <div class="col-7 col-lg-7 h-100 text-center px-3 ">
                             <h3 class="card-title mb-3">{{ plat . libelle }}</h3>
-                            <p class="card-text fs-5 overflow-auto" style="max-height: 150px;">{{ plat . description }}</p>
+                            <p class="card-text fs-5">{{ plat . description }}</p>
                         </div>
                     </div>
                     <div class="card-footer">
                         <p class="card-text mb-0 text-black fs-5">Prix : {{ plat . prix }} €</p>
-                        <a href="/commande.php?id=' . $plat['id'] . '" class="btn btn-outline-dark gris fs-5">Commander</a>
+                        <a href="{{ path('cart_add', {'id': plat . id})}}" class="btn btn-outline-dark gris fs-5">Commander</a>
                     </div>
                 </div>
 

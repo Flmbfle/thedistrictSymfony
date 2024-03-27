@@ -4,86 +4,117 @@
 
 {% block body %}
 <main class="rounded-3 border beige">
-    <div>
-      <div class="d-flex justify-content-center">
-      {# <?php
-      $platsDAO = new DAO();
+  <div>
+    <h2 class="m-4">Voici votre panier :</h2>
+    <div class="d-flex justify-content-center text-center align-content-center">
       
-      if (isset($_GET['id'])) {
-          $platId = $_GET['id'];
-          $platDetails = $platsDAO->getPlatById($platId);
-      
-          // Vérifiez si les détails du plat sont récupérés avec succès
-          if ($platDetails) {
-              echo ' #}
-              <div class="card m-3 col-lg-5 border border-black bg-beige card-custom rounded-4 shadow">
-                  <div class="row g-0 bg-beige">
-                      <div class="col-md-4 col-lg-5 d-flex align-items-center justify-content-center">
-                          <img src="/assets/img/plats/' . $platDetails['image'] . '" class="card-img img-fluid" alt="Image de la carte">
-                      </div>
-                      <div class="col-md-8 col-lg-7 h-100 text-center px-3">
-                          <h5 class="card-title fs-3">' . $platDetails['libelle'] . '</h5>
-                          <p class="card-text">' . $platDetails['description'] . '</p>
-                      </div>
-                  </div>
-                  <div class="card-footer">
-                      <p class="card-text mb-0"><small class="text-black fs-6">Prix : ' . $platDetails['prix'] . ' €</small></p>
-                  </div>
+      {% if items | length > 0 %}
+        <table class='table table-light table-striped table-bordered table-responsive m-3'>
+          <thead>
+            <tr>
+              <th class='m-5'>Image</th>
+              <th class='m-5'>Libelle</th>
+              <th class='m-5'>Description</th>
+              <th class='m-5'>Prix</th>
+              <th class='m-5'>Quantité</th>
+              <th class='m-5'>Total</th>
+            </tr>  
+          </thead>
+        <tbody>
+        {% for item in items %}
+          <tr class="m-3">
+            <td class="col-1 align-middle"><img src="{{ asset ( 'assets/img/plats/' ~ item . product . image ) }}" class="card-img img-fluid" alt="{{ item . product . libelle }}"</td>
+            <td class="col-1 align-middle">{{ item.product.libelle }}</td>
+            <td class="col-7 align-middle">{{ item.product.description }}</td>
+            <td class="col-1 align-middle">{{ item.product.prix }} € </td>
+            <td class="col-1 align-middle">
+              <div class="d-flex align-items-center justify-content-center">
+                <div class="d-flex align-items-center rounded-3 mx-2">
+                  <a href="{{ path('cart_delete', {id : item.product.id})}}" class="btn btn-dark btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                      <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                    </svg>
+                  </a>
+                </div>
+                <div class="d-flex align-items-center justify-content-around bg-dark rounded-3 mx-2">
+                  <a href="{{ path('cart_remove', {id : item.product.id})}}" class="btn btn-outline-dark btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-file-minus-fill" viewBox="0 0 16 16">
+                      <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M6 7.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1 0-1"/>
+                    </svg>
+                  </a>
+                  <span class="text-white">{{ item.quantity }}</span>
+                  <a href="{{ path('cart_add', {id : item.product.id})}}" class="btn btn-outline-dark btn-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-file-plus-fill" viewBox="0 0 16 16">
+                      <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0"/>
+                    </svg>
+                  </a>
+                </div>
               </div>
-              {# ';
-          } else {
-              echo "Aucun plat trouvé.";
-          }
-      } else {
-      echo "Identifiant du plat non spécifié.";
-      }
-      ?> #}
-      </div><!--Plats commandé-->
-      <div class="px-5 py-2 shadow mt-2 rounded-3">
-        <form action="../traitement_commande.php?id=<?php echo $platId; ?>" method="POST" id="commandeForm" class="row d-flex justify-content-around">
-          <!-- NOM PRENOM-->
-          <div class="my-2">
-            <label for="exampleInputNom" class="form-label">Nom et Prénom<b>*</b></label>
-            <input type="text" name="exampleInputNom" class="form-control rounded-5 btn-outline-dark bg-beige shadow" id="exampleInputNom" placeholder="Veuillez saisir votre nom et votre prénom" required>
-            <div class="text-danger alert alert-danger d-none rounded-pill mt-1" role="alert" id="NomError">Veuillez saisir un Nom valide</div>
-          </div>
-          <!-- EMAIL -->
-          <div class="col-md-6 my-2">
-            <label for="exampleInputEmail" class="form-label">Email<b>*</b></label>
-            <input type="email" name="exampleInputEmail" class="form-control rounded-5 btn-outline-dark bg-beige shadow" id="exampleInputEmail" placeholder="dave.loper@afpa.fr" required>
-            <div class="text-danger alert alert-danger d-none rounded-pill mt-1" role="alert" id="EmailError">Veuillez saisir une email valide</div>
-            <div id="emailHelp" class="form-text">
-              <span class="beige">Nous ne partagerons jamais votre email.</span>
-              </div>
-            </div>
-            <!--TELEPHONE-->
-            <div class="col-md-6 my-2">
-              <label for="exampleInputTel" class="form-label">Téléphone<b>*</b></label>
-              <input type="tel" name="exampleInputTel" class="form-control rounded-5 btn-outline-dark bg-beige shadow" id="exampleInputTel" placeholder="xx.xx.xx.xx.xx" required>
-              <div class="text-danger alert alert-danger d-none rounded-pill mt-1" role="alert" id="TelError">Veuillez saisir un numéro de téléphone Français</div>
-            </div>
-            <!--ADRESSE-->
-            <div class="my-2">
-              <label for="exampleInputAdresse" class="form-label">Adresse<b>*</b></label>
-              <input type="text" name="exampleInputAdresse" class="form-control rounded-5 btn-outline-dark bg-beige shadow" id="exampleInputAdresse" required>
-              <div class="text-danger alert alert-danger d-none rounded-pill mt-1" role="alert" id="AdresseError">Veuillez saisir une adresse valide</div>
-            </div>
-            <!--CONDITIONS-->
-            <div class="row">
-              <!-- <div class="my-2">
-                <input type="checkbox" name="conditions" value="j'accepte le traitement informatique de ce formulaire"  id="conditions" required>
-                <span class="fs-6"><b>*</b>J'accepte le traitement informatique de ce formulaire.</span><br>
-                <div class="text-danger alert alert-danger d-none" role="alert" id="ConditionError">Merci de bien vouloir accpeté les conditions</div>
-              </div> -->
-              <div class="d-flex justify-content-end">
-                <input type="reset" value="Annuler" id="btn_annuler" class="btn shadow btn-form me-2 rounded-5 fs-5">
-                <button type="submit" id="btn_envoyer" class="btn shadow btn-form rounded-5 fs-5">Valider</button>
-              </div>
-            </div>
-          </form>
+            </td>
+            <td class="col-1 align-middle">{{ item.product.prix * item.quantity }} € </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+          <tfoot class="table-secondary table-active">
+            <td colspan="3" class="text-end">Total : </td>
+            <td>{{ total }} €</td>
+            <td colspan="2"></td>
+        {% else %}
+          <h3>Votre panier est vide !!</h3>
+      {% endif %}
+          </tfoot>
+      </table>
+      <a href="">Valider le panier</a>
+        
+    </div>
+    
+    <!--Plats commandé-->
+    {# <div class="px-5 py-2 shadow mt-2 rounded-3">
+      <form action="../traitement_commande.php?id=<?php echo $platId; ?>" method="POST" id="commandeForm" class="row d-flex justify-content-around">
+        <!-- NOM PRENOM-->
+        <div class="my-2">
+          <label for="exampleInputNom" class="form-label">Nom et Prénom<b>*</b></label>
+          <input type="text" name="exampleInputNom" class="form-control rounded-5 btn-outline-dark bg-beige shadow" id="exampleInputNom" placeholder="Veuillez saisir votre nom et votre prénom" required>
+          <div class="text-danger alert alert-danger d-none rounded-pill mt-1" role="alert" id="NomError">Veuillez saisir un Nom valide</div>
         </div>
-      </div>
-    </main>
+        <!-- EMAIL -->
+        <div class="col-md-6 my-2">
+          <label for="exampleInputEmail" class="form-label">Email<b>*</b></label>
+          <input type="email" name="exampleInputEmail" class="form-control rounded-5 btn-outline-dark bg-beige shadow" id="exampleInputEmail" placeholder="dave.loper@afpa.fr" required>
+          <div class="text-danger alert alert-danger d-none rounded-pill mt-1" role="alert" id="EmailError">Veuillez saisir une email valide
+          </div>
+          <div id="emailHelp" class="form-text">
+            <span class="beige">Nous ne partagerons jamais votre email.</span>
+          </div>
+        </div>
+        <!--TELEPHONE-->
+        <div class="col-md-6 my-2">
+          <label for="exampleInputTel" class="form-label">Téléphone<b>*</b></label>
+          <input type="tel" name="exampleInputTel" class="form-control rounded-5 btn-outline-dark bg-beige shadow" id="exampleInputTel" placeholder="xx.xx.xx.xx.xx" required>
+          <div class="text-danger alert alert-danger d-none rounded-pill mt-1" role="alert" id="TelError">Veuillez saisir un numéro de téléphone Français</div>
+        </div>
+        <!--ADRESSE-->
+        <div class="my-2">
+          <label for="exampleInputAdresse" class="form-label">Adresse<b>*</b></label>
+          <input type="text" name="exampleInputAdresse" class="form-control rounded-5 btn-outline-dark bg-beige shadow" id="exampleInputAdresse" required>
+          <div class="text-danger alert alert-danger d-none rounded-pill mt-1" role="alert" id="AdresseError">Veuillez saisir une adresse valide</div>
+        </div>
+        <!--CONDITIONS-->
+        <div class="row">
+          <!-- <div class="my-2">
+            <input type="checkbox" name="conditions" value="j'accepte le traitement informatique de ce formulaire"  id="conditions" required>
+            <span class="fs-6"><b>*</b>J'accepte le traitement informatique de ce formulaire.</span><br>
+            <div class="text-danger alert alert-danger d-none" role="alert" id="ConditionError">Merci de bien vouloir accpeté les conditions</div>
+          </div> -->
+          <div class="d-flex justify-content-end">
+            <input type="reset" value="Annuler" id="btn_annuler" class="btn shadow btn-form me-2 rounded-5 fs-5">
+            <button type="submit" id="btn_envoyer" class="btn shadow btn-form rounded-5 fs-5">Valider</button>
+          </div>
+        </div>
+      </form>
+    </div> #}
+  </div>
+</main>
     {% block javascripts %}
         <script src="assets/JS/commande.js"></script>
     {% endblock %}

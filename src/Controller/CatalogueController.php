@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Plat;
 use App\Repository\CategorieRepository;
 use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -67,7 +68,7 @@ class CatalogueController extends AbstractController
         
         // Regarde pagination pour les autres pages du caroussel
 
-        return $this->render('categorie/index.html.twig', 
+        return $this->render('catalogue/categories.html.twig', 
         
             [
                 'controller_name' => 'CategorieController',
@@ -88,9 +89,18 @@ class CatalogueController extends AbstractController
     
         // Passer les plats au template pour les afficher
         return $this->render('catalogue/platscat/platscat.html.twig', [
+
             'categorie' => $categorie,
+
             'plats' => $plats,
         ]);
     }
 
+    // DETAILS
+
+    // #[Route('/{slug}', name:'app_details')]
+    // public function details(Plat $plat): Response
+    // {
+    //     return $this->render('catalogue/details.html.twig',compact('plat'));
+    // }
 }

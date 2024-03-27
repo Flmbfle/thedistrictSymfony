@@ -26,10 +26,6 @@ class Plat
     #[ORM\Column(length: 50)]
     private ?string $image = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="plats")
-     * @ORM\JoinColumn(nullable=false)
-     */
     #[ORM\ManyToOne(targetEntity: Categorie::class, inversedBy: 'plat')]
     private ?categorie $categorie = null;
 

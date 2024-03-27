@@ -26,3 +26,5 @@ services:
     app.logger:
         class: Psr\Log\LoggerInterface
         arguments: ['@monolog.logger.app']
+
+    
