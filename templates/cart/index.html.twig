@@ -5,8 +5,11 @@
 {% block body %}
 <main class="rounded-3 border beige">
   <div>
-    <h2 class="m-4">Voici votre panier :</h2>
-    <div class="d-flex justify-content-center text-center align-content-center">
+    <div class="d-flex justify-content-between">
+      <h2 class="m-4">Voici votre panier :</h2>
+      <a href"{{ path('cart_empty')}}" class="btn btn-md btn-outline-light">Vider le panier</a>
+    </div>
+    <div class="d-flex justify-content-center text-center align-content-center flex-wrap">
       
       {% if items | length > 0 %}
         <table class='table table-light table-striped table-bordered table-responsive m-3'>
@@ -58,13 +61,14 @@
           <tfoot class="table-secondary table-active">
             <td colspan="3" class="text-end">Total : </td>
             <td>{{ total }} €</td>
-            <td colspan="2"></td>
+            <td colspan="2"><a href="{{ path('app_commande_add_commande')}}" class="btn btn-outline-dark">Valider le panier</a></td>
+
         {% else %}
-          <h3>Votre panier est vide !!</h3>
+          <h3 class="m-5">Votre panier est vide !!</h3>
       {% endif %}
           </tfoot>
       </table>
-      <a href="">Valider le panier</a>
+      
         
     </div>
     

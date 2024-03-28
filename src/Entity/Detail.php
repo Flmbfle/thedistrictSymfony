@@ -15,7 +15,7 @@ class Detail
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $Quantite = null;
+    private ?int $quantite = null;
 
     #[ORM\ManyToOne(inversedBy: 'detail')]
     #[ORM\JoinColumn(nullable: false)]
@@ -32,12 +32,12 @@ class Detail
 
     public function getQuantite(): ?int
     {
-        return $this->Quantite;
+        return $this->quantite;
     }
 
-    public function setQuantite(int $Quantite): static
+    public function setQuantite(int $quantite): static
     {
-        $this->Quantite = $Quantite;
+        $this->quantite = $quantite;
 
         return $this;
     }

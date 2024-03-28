@@ -21,9 +21,7 @@ class Commande
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $total = null;
 
-
-
-    #[ORM\OneToMany(targetEntity: Detail::class, mappedBy: 'commande')]
+    #[ORM\OneToMany(targetEntity: Detail::class, mappedBy: 'commande', cascade: ['persist'])]
     private Collection $details;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -38,6 +36,7 @@ class Commande
     public function __construct()
     {
         $this->details = new ArrayCollection();
+        $this->date_commande = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
