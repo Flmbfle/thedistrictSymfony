@@ -7,7 +7,6 @@
   <div>
     <div class="d-flex justify-content-between">
       <h2 class="m-4">Voici votre panier :</h2>
-      <a href"{{ path('cart_empty')}}" class="btn btn-md btn-outline-light">Vider le panier</a>
     </div>
     <div class="d-flex justify-content-center text-center align-content-center flex-wrap">
       
@@ -59,17 +58,20 @@
         {% endfor %}
         </tbody>
           <tfoot class="table-secondary table-active">
-            <td colspan="3" class="text-end">Total : </td>
+          
+            <td colspan="3">
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="{{ path('cart_empty')}}" class="btn btn-sm btn-outline-dark m-1">Vider le panier</a> Total : 
+              </div>    
+            </td>
             <td>{{ total }} €</td>
-            <td colspan="2"><a href="{{ path('app_commande_add_commande')}}" class="btn btn-outline-dark">Valider le panier</a></td>
+            <td colspan="2"><a href="{{ path('app_commande_')}}" class="btn btn-outline-dark">Valider le panier</a></td>
 
         {% else %}
           <h3 class="m-5">Votre panier est vide !!</h3>
       {% endif %}
           </tfoot>
-      </table>
-      
-        
+      </table>  
     </div>
     
     <!--Plats commandé-->

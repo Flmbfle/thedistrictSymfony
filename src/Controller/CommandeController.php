@@ -16,6 +16,8 @@ use DateTimeImmutable;
 #[Route('/commande', name: 'app_commande_')]
 class CommandeController extends AbstractController
 {
+
+    
     #[Route('/ajout', name: 'add_commande')]
     public function add(SessionInterface $session, PlatRepository $platRepository, EntityManagerInterface $em): Response
     {
@@ -74,8 +76,10 @@ class CommandeController extends AbstractController
         $em->persist($commande);
         $em->flush();
 
+        $session->remove('panier');
+
         //dd($panier);
         $this->addFlash('message','Commande validé avec succès !');
-        return $this->redirectToRoute('app_catalogue');
+        return $this->render('commande/index.html.twig');
     }
 }
