@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\SearchFormType;
 
 class CatalogueController extends AbstractController
 {
@@ -23,23 +24,44 @@ class CatalogueController extends AbstractController
     }
 
     #[Route("/", name: "app_catalogue")]
-
-    public function index(): Response
+    public function index(Request $request, PlatRepository $plats): Response
     {
-        $categorie = $this -> categorieRepository -> findBy ( ['active' => 1], null , 6);
-        $plat = $this -> platRepository -> findBy ( ['active'=> 1], /*['quantité' => 'ASC']*/ null, 3);
-        
-        return $this->render('catalogue/index.html.twig', 
-        
-            [
-                'controller_name' => 'CatalogueController',
+        $form = $this->createForm(SearchFormType::class);
+        $form->handleRequest($request);
 
-                'categorie'=> $categorie,
+        // Initialiser $plat avec une valeur par défaut
+        $plat = [];
 
-                'plat'=> $plat,
-            ]
+        // Vérifier si le formulaire a été soumis et est valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer les données du formulaire
+            $data = $form->getData();
             
-        );
+            // Vérifier si la clé 'query' est définie dans les données du formulaire
+            if (isset($data['query'])) {
+                // Récupérer la valeur du champ 'query' du formulaire
+                $query = $data['query'];
+
+                // Rechercher les plats correspondant à la recherche
+                $plat = $plats->findByLibelle($query);
+            }
+        } else {
+            // Traitement par défaut si le formulaire n'est pas soumis ou invalide
+            $plat = $plats->findAll();
+        }
+
+        // Récupérer les catégories actives
+        $categories = $this->categorieRepository->findBy(['active' => true], null, 6);
+
+        // Récupérer les plats actifs
+        $plats = $plats->findBy(['active' => true], null, 3);
+        
+        return $this->render('catalogue/index.html.twig', [
+            'controller_name' => 'CatalogueController',
+            'categories' => $categories,
+            'plats' => $plats,
+            'searchForm' => $form->createView(),
+        ]);
     }
 
     
@@ -96,11 +118,25 @@ class CatalogueController extends AbstractController
         ]);
     }
 
-    // DETAILS
 
-    // #[Route('/{slug}', name:'app_details')]
-    // public function details(Plat $plat): Response
+    // // Barre de rehcerche 
+    // public function search(Request $request , PlatRepository $plats): Response
     // {
-    //     return $this->render('catalogue/details.html.twig',compact('plat'));
+    //     $form = $this->createForm(SearchFormType::class);
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $query = $form->getData()['query'];
+    //         $plat = $this->$plats->findByLibelle($query);
+    //     } else {
+    //     // Traitement par défaut si le formulaire n'est pas soumis ou invalide
+    //     $plat = $plats->findAll(); // Correction ici
+    //     }
+
+    //     return $this->render('catalogue/index.html.twig', [
+    //         'searchForm' => $form->createView(),
+    //         'plat' => $plat,
+    //     ]);
     // }
+
 }

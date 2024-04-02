@@ -37,3 +37,7 @@ supprimer:
     path: '/supprimer/{id}'
     # Indiquez le contrôleur qui gère cet itinéraire.
     controller: 'App\Service\PanierService::delete'
+
+add_commande:
+    path: /ajout
+    controller: App\Controller\CommandeController::add

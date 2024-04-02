@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CommandeType extends AbstractType
 {
@@ -26,15 +27,27 @@ class CommandeType extends AbstractType
                 ],
                 'label'=> 'Adresse de facturation',
             ])
-            ->add('MoyenPaiement', TextType::class, [
+            ->add('moyenPaiement', ChoiceType::class, [
+                'choices' => [
+                    'Visa' => 'Visa',
+                    'MasterCard' => 'Mastercard',
+                    'Maestro' => 'Maestro',
+                    'American Express' => 'American Express',
+                    // Ajoutez d'autres moyens de paiement ici si nécessaire
+                ],
+                'placeholder' => 'Sélectionnez un moyen de paiement',
                 'attr' => [
                     'class' => 'form-control my-2'
                 ],
-                'label'=> 'Moyen de paiement',
+                'label' => 'Moyen de paiement',
             ])
+            
 
             ->add('RGPDConsent', CheckboxType::class, [
                 'mapped' => false,
+                'attr' => [
+                    'class'=> 'my-3'
+                ],
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
@@ -42,6 +55,19 @@ class CommandeType extends AbstractType
                 ],
                 'label'=> 'En m\'inscrivant à ce site j\'accepte ....',
             ])
+
+            ->add('numeroCarte', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control my-2',
+                ],
+                'label' => 'Numéro de carte',
+            ])
+            ->add('ccv', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control my-2',
+                ],
+                'label' => 'CCV',
+            ]);
 
         ;
     }
