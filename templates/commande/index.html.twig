@@ -1,19 +1,21 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CommandeController!{% endblock %}
+{% block title %}Formulaire de commande{% endblock %}
 
 {% block body %}
-
-
-<div class="example-wrapper">
-    <h1>Valider la commande</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/flambi/ProjetSymfony/thedistrict/src/Controller/CommandeController.php</code></li>
-        <li>Your template at <code>/home/flambi/ProjetSymfony/thedistrict/templates/commande/index.html.twig</code></li>
-    </ul>
-
-    <a href="{{ path('app_commande_add_commande')}}" class="btn btn-outline-dark">Valider le panier</a>
-</div>
+<section class="container my-3 beige">
+    <div class="row">
+        <div class="col-lg-8 col-12 mx-auto">
+            <h1>Formulaire de commande</h1>
+            {{ form_start(commandeForm) }}
+            {{ form_row(commandeForm.adresseLivraison) }}
+            {{ form_row(commandeForm.adresseFacturation) }}
+            {{ form_row(commandeForm.MoyenPaiement) }}
+            {{ form_row(commandeForm.RGPDConsent) }}
+            <button type="submit" class="btn btn-primary">Valider la commande</button>
+            {{ form_end(commandeForm) }}
+        </div>
+    </div>
+<section>
 {% endblock %}

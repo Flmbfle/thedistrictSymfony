@@ -10,14 +10,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use DateTime;
 use DateTimeImmutable;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\CommandeType;
 
-#[Route('/commande', name: 'app_commande_')]
 class CommandeController extends AbstractController
 {
+    #[Route('/commande', name: 'commande')]
+    public function commande(Request $request): Response
+    {
+        $form = $this->createForm(CommandeType::class);
 
-    
+        return $this->render('commande/index.html.twig', [
+            'controller_name' => 'CommandeController',
+            'commandeForm' => $form,
+        ]);
+    }
+  
     #[Route('/ajout', name: 'add_commande')]
     public function add(SessionInterface $session, PlatRepository $platRepository, EntityManagerInterface $em): Response
     {
@@ -82,4 +91,7 @@ class CommandeController extends AbstractController
         $this->addFlash('message','Commande validé avec succès !');
         return $this->render('commande/index.html.twig');
     }
+
+
+
 }
