@@ -30,7 +30,7 @@ class CommandeController extends AbstractController
     #[Route('/ajout', name: 'add_commande')]
     public function add(SessionInterface $session, PlatRepository $platRepository, EntityManagerInterface $em): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_CLIENT');
+        $this->denyAccessUnlessGranted('ROLE_USER');
         
         $panier = $session->get('panier', []);
 
@@ -89,7 +89,7 @@ class CommandeController extends AbstractController
 
         //dd($panier);
         $this->addFlash('message','Commande validé avec succès !');
-        return $this->render('commande/index.html.twig');
+        return $this->render('catalogue/index.html.twig');
     }
 
 
